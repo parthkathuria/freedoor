@@ -5,9 +5,10 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
-
 var routes = require('./routes/index');
 //var users = require('./routes/users');
+
+var fs = require('fs');
 
 var app = express();
 
@@ -21,20 +22,20 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(require('less-middleware')(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 
-mongoose.connect('mongodb://127.0.0.1/freedoor');
-//mongoose.model('users',{name: String});
 app.use('/', routes);
 //app.use('/users', users);
-
-
+mongoose.connect('mongodb://localhost/freedoor');
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
     err.status = 404;
     next(err);
+});
+//load all files in models dir
+fs.readdirSync(__dirname + '/models').forEach(function(filename) {
+  if (~filename.indexOf('.js')) require(__dirname + '/models/' + filename)
 });
 
 // error handlers
