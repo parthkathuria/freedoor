@@ -96,4 +96,55 @@ router.post('/category',function(req,res){
 	})
 });
 
+//Product APIs
+
+//get all products
+router.get('/category/:categoryId/products', function(req, res) {
+	mongoose.model('products').find({categoryId:req.params.categoryId},function(err, products) {
+		if (!err) {
+			return res.send(products);
+		} else {
+			return res.send(err);
+		}
+
+	});
+});
+
+//get product
+router.get('/category/:categoryId/products/:productId',function(req,res){
+	mongoose.model('products').find({_id: req.params.productId,categoryId:req.params.categoryId},function(err, products) {
+		if (!err) {
+			return res.send(products);
+		} else {
+			return res.send(err);
+		}
+
+	});
+});
+
+//create product
+router.post('/category/:categoryId/products',function(req,res){
+	var data = new products({
+		productName : req.body.productName,
+		quantity : req.body.quantity,
+		userId : req.body.userId,
+		expectedOffer : req.body.expectedOffer,
+		productDesc : req.body.productDesc,
+		productExpiryDate : req.body.productExpiryDate,
+		isValid : req.body.isValid,
+		categoryId : req.body.categoryId,
+		lastUpdated : req.body.lastUpdated
+		
+	});
+	
+	data.save(function(err,doc){
+		if(!err){
+			return res.send(data);
+		}else{
+			return res.send(err);
+		}
+	})
+});
+
+
 module.exports = router;
