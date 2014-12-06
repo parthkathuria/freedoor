@@ -17,8 +17,7 @@ var offer = mongoose.model('offer', offerSchema);
 var comments = mongoose.model('comments',commentSchema);
 
 
-var userId = 0;
-
+//User APIs
 router.get('/users', function(req, res) {
 	mongoose.model('users').find(function(err, users) {
 		if (!err) {
@@ -30,11 +29,23 @@ router.get('/users', function(req, res) {
 	});
 });
 
+router.get('/users/:userId',function(req,res){
+	mongoose.model('users').find({_id: req.params.userId},function(err, users) {
+		if (!err) {
+			return res.send(users);
+		} else {
+			return res.send(err);
+		}
+
+	});
+});
+
 router.post('/users',function(req,res){
 	var data = new users({
-		name : req.body.name,
-		email : req.body.email,
-		phone : req.body.phone
+		firstname : req.body.firstname,
+		lastname : req.body.lastname,
+		emailid : req.body.emailid,
+		mobile : req.body.mobile
 	});
 	
 	data.save(function(err,doc){
@@ -46,7 +57,43 @@ router.post('/users',function(req,res){
 	})
 });
 
-function generateUserId(){
-	return userId++;
-}
+
+//Category APIs
+
+router.get('/category', function(req, res) {
+	mongoose.model('category').find(function(err, category) {
+		if (!err) {
+			return res.send(category);
+		} else {
+			return res.send(err);
+		}
+
+	});
+});
+
+router.get('/category/:categoryId',function(req,res){
+	mongoose.model('category').find({_id: req.params.categoryId},function(err, category) {
+		if (!err) {
+			return res.send(category);
+		} else {
+			return res.send(err);
+		}
+
+	});
+});
+
+router.post('/category',function(req,res){
+	var data = new category({
+		categoryName : req.body.categoryName,
+	});
+	
+	data.save(function(err,doc){
+		if(!err){
+			return res.send(data);
+		}else{
+			return res.send(err);
+		}
+	})
+});
+
 module.exports = router;

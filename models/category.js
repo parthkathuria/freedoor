@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var categorySchema = mongoose.Schema({
 	
-	category_name : {
+	categoryName : {
 		type: String,
 		required : true
 	}

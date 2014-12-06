@@ -2,15 +2,15 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var productSchema = mongoose.Schema({
-	category_id : {
+	categoryId : {
 		type : Schema.ObjectId,
 		ref : 'catergory'
 	},
-	user_id : {
+	userId : {
 		type: Schema.ObjectId,
 		ref : 'users'
 	},
-	product_name : {
+	productName : {
 		type: String,
 		required : true
 	},
@@ -26,7 +26,6 @@ var productSchema = mongoose.Schema({
 		type: Number,
 		required : true
 	},
-	status : String,
 	isValid : Boolean,
 	productExpiryDate : Date
 	
