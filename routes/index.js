@@ -13,7 +13,7 @@ var commentSchema = require('../models/comments.js').commentSchema;
 var users = mongoose.model('users',userSchema);
 var products = mongoose.model('products',productSchema);
 var category = mongoose.model('category',categorySchema);
-var offer = mongoose.model('offer', offerSchema);
+var offers = mongoose.model('offers', offerSchema);
 var comments = mongoose.model('comments',commentSchema);
 
 
@@ -60,6 +60,7 @@ router.post('/users',function(req,res){
 
 //Category APIs
 
+//get all categories
 router.get('/category', function(req, res) {
 	mongoose.model('category').find(function(err, category) {
 		if (!err) {
@@ -70,7 +71,7 @@ router.get('/category', function(req, res) {
 
 	});
 });
-
+//get category
 router.get('/category/:categoryId',function(req,res){
 	mongoose.model('category').find({_id: req.params.categoryId},function(err, category) {
 		if (!err) {
@@ -81,7 +82,7 @@ router.get('/category/:categoryId',function(req,res){
 
 	});
 });
-
+//post category
 router.post('/category',function(req,res){
 	var data = new category({
 		categoryName : req.body.categoryName,
@@ -132,7 +133,7 @@ router.post('/category/:categoryId/products',function(req,res){
 		productDesc : req.body.productDesc,
 		productExpiryDate : req.body.productExpiryDate,
 		isValid : req.body.isValid,
-		categoryId : req.body.categoryId,
+		categoryId : req.params.categoryId,
 		lastUpdated : req.body.lastUpdated
 		
 	});
@@ -146,5 +147,96 @@ router.post('/category/:categoryId/products',function(req,res){
 	})
 });
 
+//Offer APIs
+
+//get all offers
+router.get('/category/:categoryId/products/:productId/offers', function(req, res) {
+	mongoose.model('offers').find({productId:req.params.productId},function(err, offers) {
+		if (!err) {
+			return res.send(offers);
+		} else {
+			return res.send(err);
+		}
+
+	});
+});
+
+//get offer
+router.get('/category/:categoryId/products/:productId/offers/:offerId',function(req,res){
+	mongoose.model('offers').find({_id: req.params.offerId,productId:req.params.productId},function(err, offers) {
+		if (!err) {
+			return res.send(offers);
+		} else {
+			return res.send(err);
+		}
+
+	});
+});
+
+//create offer
+router.post('/category/:categoryId/products/:productId/offers',function(req,res){
+	var data = new offers({
+		buyingQty : req.body.buyingQty,
+		offeredDetails : req.body.offeredDetails,
+		buyerStatus : req.body.buyerStatus,
+		sellerStatus : req.body.sellerStatus,
+		offerExpiry : req.body.offerExpiry,
+		productId : req.params.productId,
+		buyerId : req.body.buyerId,
+		lastModified : req.body.lastModified,
+		comments : req.body.comments
+		
+	});
+	
+	data.save(function(err,doc){
+		if(!err){
+			return res.send(data);
+		}else{
+			return res.send(err);
+		}
+	})
+});
+
+
+//Comment APIs
+
+//get all comments
+router.get('/category/:categoryId/products/:productId/offers/:offerId/comments', function(req, res) {
+	mongoose.model('comments').find({offerId: req.params.offerId},function(err, comments) {
+		if (!err) {
+			return res.send(comments);
+		} else {
+			return res.send(err);
+		}
+
+	});
+});
+//get comment
+router.get('/category/:categoryId/products/:productId/offers/:offerId/comments/:commentId',function(req,res){
+	mongoose.model('comments').find({_id: req.params.commentId,offerId: req.params.offerId},function(err, comments) {
+		if (!err) {
+			return res.send(comments);
+		} else {
+			return res.send(err);
+		}
+
+	});
+});
+//post comment
+router.post('/category/:categoryId/products/:productId/offers/:offerId/comments',function(req,res){
+	var data = new comments({
+		comment : req.body.comment,
+		 userId : req.body.userId,
+		 offerId : req.params.offerId
+	});
+	
+	data.save(function(err,doc){
+		if(!err){
+			return res.send(data);
+		}else{
+			return res.send(err);
+		}
+	})
+});
 
 module.exports = router;

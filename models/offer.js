@@ -1,19 +1,23 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var offerSchema = mongoose.Schema({
-	product_id : {
+	productId : {
 		type : Schema.ObjectId,
 		ref : 'products'
 	},
-	user_id :{
+	buyerId :{
 		type : Schema.ObjectId,
 		ref : 'users'
 	},
-	status : String,
-	comment : {
+	buyingQty : Number,
+	offeredDetails : String,
+	buyerStatus : String,
+	sellerStatus : String,
+	offerExpiry : Date,
+	comments : {
 		type : Schema.ObjectId,
 		ref : 'comments'
 	}
 },{strict : false});
 
-mongoose.model('offer',offerSchema);
+mongoose.model('offers',offerSchema);
