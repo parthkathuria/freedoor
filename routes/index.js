@@ -53,7 +53,6 @@ router.get('/users/:userId',function(req,res){
 
 //create user
 router.post('/users',function(req,res){
-	//var emailRegEx = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
 	var numRegEx = /^[\s()+-]*([0-9][\s()+-]*){10,13}$/;
 	
 	var data = new users({
@@ -63,29 +62,24 @@ router.post('/users',function(req,res){
 		mobile : req.body.mobile
 	});
 	
-	/*if(emailRegEx.test(data.emailid) === false || numRegEx.test(data.mobile) === false){
-		if(emailRegEx.test(data.emailid) === false){
-			return res.send("Please enter valid Email Id");
+	if(numRegEx.test(data.mobile) === false || validator.isEmail(data.emailid) === false){
+		if(numRegEx.test(data.mobile) === false && validator.isEmail(data.emailid) === false){
+			return res.send(500,"Invalid Email ID!\nInvalid Mobile Number!");
 		}else if(numRegEx.test(data.mobile) === false){
-			return res.send("Please enter valid phone number");
+			return res.send(500,"Invalid Mobile Number!");
+		}else if(validator.isEmail(data.emailid) === false){
+			return res.send(500,"Invalid Email ID!");
 		}
-	}*/
-	
-	/*if(numRegEx.test(data.mobile) == false){
-		
-	}*/
-	if(validator.isEmail(data.emailid)){
+	}else{
 		data.save(function(err,doc){
 			if(!err){
 				return res.send(data);
 			}else{
-				return res.send(err);
+				return res.send(500,err);
 			}
 		});
 	}
-	else{
-		return res.send(500, "Email not valid!");
-	}
+	
 });
 
 
