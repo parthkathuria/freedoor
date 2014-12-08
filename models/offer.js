@@ -11,8 +11,7 @@ var offerSchema = mongoose.Schema({
 	},
 	buyingQty : Number,
 	offeredDetails : String,
-	buyerStatus : String,
-	sellerStatus : String,
+	status : String,
 	offerExpiry : Date,
 	comments : {
 		type : Schema.ObjectId,

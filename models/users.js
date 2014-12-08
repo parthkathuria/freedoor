@@ -14,8 +14,11 @@ var userSchema = mongoose.Schema({
 		unique : true,
 		required : true
 	},
-	mobile : Number
+	mobile : {
+		type: Number,
+		required : true
+	}
 	
-},{strict : false});
+},{strict : true});
 
 mongoose.model('users',userSchema);

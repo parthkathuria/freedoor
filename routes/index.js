@@ -3,6 +3,8 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var moment = require('moment');
 var moment_timezone = require('moment-timezone');
+var validator = require('validator');
+
 // Getting Schema
 var userSchema = require('../models/users.js').userSchema;
 var productSchema = require('../models/products.js').productSchema; 
@@ -19,29 +21,41 @@ var comments = mongoose.model('comments',commentSchema);
 
 
 // User APIs
+
+//get all users
 router.get('/users', function(req, res) {
 	mongoose.model('users').find(function(err, users) {
 		if (!err) {
 			return res.send(users);
 		} else {
-			return res.send(err);
+			return res.send(500,err);
 		}
 
 	});
 });
 
+//get user
 router.get('/users/:userId',function(req,res){
-	mongoose.model('users').find({_id: req.params.userId},function(err, users) {
+	mongoose.model('users').findOne({_id: req.params.userId},function(err, users) {
 		if (!err) {
-			return res.send(users);
+			if(users === null){
+				return res.send("User ID not valid.");
+			}else{
+				return res.send(users);
+			}
+			
 		} else {
-			return res.send(err);
+			return res.send(500,err);
 		}
 
 	});
 });
 
+//create user
 router.post('/users',function(req,res){
+	//var emailRegEx = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+	var numRegEx = /^[\s()+-]*([0-9][\s()+-]*){10,13}$/;
+	
 	var data = new users({
 		firstname : req.body.firstname,
 		lastname : req.body.lastname,
@@ -49,13 +63,29 @@ router.post('/users',function(req,res){
 		mobile : req.body.mobile
 	});
 	
-	data.save(function(err,doc){
-		if(!err){
-			return res.send(data);
-		}else{
-			return res.send(err);
+	/*if(emailRegEx.test(data.emailid) === false || numRegEx.test(data.mobile) === false){
+		if(emailRegEx.test(data.emailid) === false){
+			return res.send("Please enter valid Email Id");
+		}else if(numRegEx.test(data.mobile) === false){
+			return res.send("Please enter valid phone number");
 		}
-	});
+	}*/
+	
+	/*if(numRegEx.test(data.mobile) == false){
+		
+	}*/
+	if(validator.isEmail(data.emailid)){
+		data.save(function(err,doc){
+			if(!err){
+				return res.send(data);
+			}else{
+				return res.send(err);
+			}
+		});
+	}
+	else{
+		return res.send(500, "Email not valid!");
+	}
 });
 
 
@@ -67,7 +97,7 @@ router.get('/category', function(req, res) {
 		if (!err) {
 			return res.send(category);
 		} else {
-			return res.send(err);
+			return res.send(500,err);
 		}
 
 	});
@@ -78,7 +108,7 @@ router.get('/category/:categoryId',function(req,res){
 		if (!err) {
 			return res.send(category);
 		} else {
-			return res.send(err);
+			return res.send(500,err);
 		}
 
 	});
@@ -106,7 +136,7 @@ router.get('/category/:categoryId/products', function(req, res) {
 		if (!err) {
 			return res.send(products);
 		} else {
-			return res.send(err);
+			return res.send(500,err);
 		}
 
 	});
@@ -115,10 +145,11 @@ router.get('/category/:categoryId/products', function(req, res) {
 // get product
 router.get('/category/:categoryId/products/:productId',function(req,res){
 	mongoose.model('products').find({_id: req.params.productId,categoryId:req.params.categoryId},function(err, products) {
+		
 		if (!err) {
 			return res.send(products);
 		} else {
-			return res.send(err);
+			return res.send(500,err);
 		}
 
 	});
@@ -130,7 +161,7 @@ router.delete('/category/:categoryId/products/:productId',function(req,res){
 		if (!err) {
 			return res.send(200);
 		} else {
-			return res.send(err);
+			return res.send(500,err);
 		}
 
 	});
@@ -157,7 +188,7 @@ router.post('/category/:categoryId/products',function(req,res){
 		if(!err){
 			return res.send(data);
 		}else{
-			return res.send(err);
+			return res.send(500,err);
 		}
 	});
 });
@@ -188,7 +219,7 @@ router.put('/category/:categoryId/products/:productId',function(req,res){
 		    		  }
 		    	  });
 		      } else {
-		    	  res.send(err);
+		    	  res.send(500,err);
 		      }
 		    });
 
@@ -203,7 +234,7 @@ router.get('/category/:categoryId/products/:productId/offers', function(req, res
 		if (!err) {
 			return res.send(offers);
 		} else {
-			return res.send(err);
+			return res.send(500,err);
 		}
 
 	});
@@ -215,7 +246,7 @@ router.get('/category/:categoryId/products/:productId/offers/:offerId',function(
 		if (!err) {
 			return res.send(offers);
 		} else {
-			return res.send(err);
+			return res.send(500,err);
 		}
 
 	});
@@ -227,14 +258,14 @@ router.delete('/category/:categoryId/products/:productId/offers/:offerId',functi
 		if (!err) {
 			return res.send(200);
 		} else {
-			return res.send(err);
+			return res.send(500,err);
 		}
 
 	});
 });
 
-// create offer
-router.post('/category/:categoryId/products/:productId/offers/:offerId',function(req,res){
+// update offer
+router.put('/category/:categoryId/products/:productId/offers/:offerId',function(req,res){
 	var now = moment();
 	var formatted = now.format('MM-DD-YYYY');
 	mongoose.model('offers').findById(req.params.offerId,function(err, offer) {
@@ -257,7 +288,7 @@ router.post('/category/:categoryId/products/:productId/offers/:offerId',function
 		    		  }
 		    	  });
 		      } else {
-		    	  res.send(err);
+		    	  res.send(500,err);
 		      }
 		    });
 
@@ -265,7 +296,7 @@ router.post('/category/:categoryId/products/:productId/offers/:offerId',function
 	});
 });
 
-//update offer
+//create offer
 router.post('/category/:categoryId/products/:productId/offers',function(req,res){
 	var now = moment();
 	var formatted = now.format('MM-DD-YYYY');
@@ -286,7 +317,7 @@ router.post('/category/:categoryId/products/:productId/offers',function(req,res)
 		if(!err){
 			return res.send(data);
 		}else{
-			return res.send(err);
+			return res.send(500,err);
 		}
 	})
 });
@@ -299,7 +330,7 @@ router.get('/category/:categoryId/products/:productId/offers/:offerId/comments',
 		if (!err) {
 			return res.send(comments);
 		} else {
-			return res.send(err);
+			return res.send(500,err);
 		}
 
 	});
@@ -310,7 +341,7 @@ router.get('/category/:categoryId/products/:productId/offers/:offerId/comments/:
 		if (!err) {
 			return res.send(comments);
 		} else {
-			return res.send(err);
+			return res.send(500,err);
 		}
 
 	});
@@ -327,7 +358,7 @@ router.post('/category/:categoryId/products/:productId/offers/:offerId/comments'
 		if(!err){
 			return res.send(data);
 		}else{
-			return res.send(err);
+			return res.send(500,err);
 		}
 	})
 });

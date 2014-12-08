@@ -8,7 +8,8 @@ var productSchema = mongoose.Schema({
 	},
 	userId : {
 		type: Schema.ObjectId,
-		ref : 'users'
+		ref : 'users',
+		required : true
 	},
 	productName : {
 		type: String,
@@ -19,8 +20,7 @@ var productSchema = mongoose.Schema({
 		required : true
 	},
 	expectedOffer : {
-		type: String,
-		required : true
+		type: String
 	},
 	quantity : {
 		type: Number,

@@ -7,6 +7,6 @@ var categorySchema = mongoose.Schema({
 		required : true
 	}
 
-},{strict : false});
+},{strict : true});
 
 mongoose.model('category',categorySchema);
