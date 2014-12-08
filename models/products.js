@@ -30,7 +30,6 @@ var productSchema = mongoose.Schema({
 	productExpiryDate : Date,
 	lastUpdated : {
 		type : Date,
-		
 	}
 	
 },{strict : false});
