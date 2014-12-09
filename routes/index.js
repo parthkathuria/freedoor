@@ -21,6 +21,9 @@ var offers = mongoose.model('offers', offerSchema);
 var comments = mongoose.model('comments',commentSchema);
 var history = mongoose.model('history',historySchema);
 
+router.get('/',function(req,res){
+	return res.send("Welcome to Freedoor!");
+});
 
 // User APIs
 
@@ -404,7 +407,7 @@ router.get('/category/:categoryId/products/:productId/offers/:offerId',function(
 
 // delete offer
 router.delete('/category/:categoryId/products/:productId/offers/:offerId',function(req,res){
-	mongoose.model('products').findOne({_id: req.params.categoryId,categoryId: req.params.categoryId},function(errChk, product) {
+	mongoose.model('products').findOne({_id: req.params.productId,categoryId: req.params.categoryId},function(errChk, product) {
 		if(!errChk){
 			if(product === null){
 				return res.status(500).send("Invalid ProductID/CategoryID");
@@ -491,7 +494,7 @@ router.put('/category/:categoryId/products/:productId/offers/:offerId',function(
 									    		  	modified : "Offer modified",
 									    	  		lastModified : formatted
 									    	  });
-						    				 historyDate.save(function(hErr){
+						    				 historyData.save(function(hErr){
 						    					if(hErr){
 						    						return res.status(500).send(hErr);
 						    					}
@@ -499,7 +502,7 @@ router.put('/category/:categoryId/products/:productId/offers/:offerId',function(
 						    			 }else{
 						    				 history.modified = "Offer Modified";
 						    				 history.lastModified = formatted;
-						    				 hisotry.update(history,function(hErrChk){
+						    				 history.update(history,function(hErrChk){
 						    					if(hErrChk){
 						    						return res.status(500).send(hErrChk);
 						    					} 
@@ -513,7 +516,7 @@ router.put('/category/:categoryId/products/:productId/offers/:offerId',function(
 						    		  	modified : "Offer modified",
 						    	  		lastModified : formatted
 						    	  });
-						    	  historyData.save
+						    	  historyData.save(historyData);
 						      } else {
 						    	  res.status(500).send(err);
 						      }
@@ -606,7 +609,7 @@ router.get('/category/:categoryId/products/:productId/offers/:offerId/comments',
 			if(product === null){
 				return res.status(500).send("Invalid ProductId/CategoryId");
 			}else{
-				mongoose.model('offers').findOne({_id:req.param.offerId},function(offerErr,offer){
+				mongoose.model('offers').findOne({_id:req.params.offerId},function(offerErr,offer){
 					if(!offerErr){
 						if(offer === null){
 							return res.status(500).send("Invalid OfferID");
@@ -639,7 +642,7 @@ router.get('/category/:categoryId/products/:productId/offers/:offerId/comments/:
 			if(product === null){
 				return res.status(500).send("Invalid ProductId/CategoryId");
 			}else{
-				mongoose.model('offers').findOne({_id:req.param.offerId},function(offerErr,offer){
+				mongoose.model('offers').findOne({_id:req.params.offerId},function(offerErr,offer){
 					if(!offerErr){
 						if(offer === null){
 							return res.status(500).send("Invalid OfferID");
@@ -682,7 +685,7 @@ router.post('/category/:categoryId/products/:productId/offers/:offerId/comments'
 			if(product === null){
 				return res.status(500).send("Invalid ProductId/CategoryId");
 			}else{
-				mongoose.model('offers').findOne({_id:req.param.offerId},function(offerErr,offer){
+				mongoose.model('offers').findOne({_id:req.params.offerId},function(offerErr,offer){
 					if(!offerErr){
 						if(offer === null){
 							return res.status(500).send("Invalid OfferID");
