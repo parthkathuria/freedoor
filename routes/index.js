@@ -178,6 +178,21 @@ router.get('/category/:categoryId/products/:productId',function(req,res){
 					    	  res.status(500).send(errProd);
 					      }
 					    });
+				}else if((Date.compare(expDate,currentDate) === 1) && (product.isValid === false)){
+					product.isValid = true;
+					product.update(product,function (errProdChk) {
+					      if (!errProdChk) {
+					    	  mongoose.model('products').findById(req.params.productId,function(updateErrChk, updateProduct) {
+					    		  if(!updateErrChk){
+					    			  res.send(updateProduct);
+					    		  }else{
+					    			  res.send(updateErrChk);
+					    		  }
+					    	  });
+					      } else {
+					    	  res.status(500).send(errProdChk);
+					      }
+					    });
 				}else{
 					return res.send(product);
 				}
@@ -238,7 +253,10 @@ router.post('/category/:categoryId/products',function(req,res){
 						if(users === null){
 							return res.status(500).send("User ID not valid.");
 						}else{
-							if(Date.compare(formatted,req.body.productExpiryDate) === -1){
+							/*console.log(formatted);
+							console.log(req.body.productExpiryDate);
+							console.log(Date.compare(formatted,req.body.productExpiryDate));*/
+							if(Date.compare(formatted,req.body.productExpiryDate) === 1){
 								return res.status(500).send("Product Expiry Date cannot before today's date.");
 							}else{
 								data.save(function(errSave,doc){
@@ -277,7 +295,7 @@ router.put('/category/:categoryId/products/:productId',function(req,res){
 				return res.status(500).send("Invalid Product Id/Category Id");
 			}else{
 				mongoose.model('products').findById(req.params.productId,function(errProd, product) {
-					if(Date.compare(formatted,req.body.productExpiryDate) === -1){
+					if(Date.compare(formatted,req.body.productExpiryDate) === 1){
 						return res.status(500).send("Product Expiry Date cannot before today's date.");
 					}else{
 					product.productName = req.body.productName;

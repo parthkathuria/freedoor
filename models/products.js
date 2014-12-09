@@ -26,7 +26,10 @@ var productSchema = mongoose.Schema({
 		type: Number,
 		required : true
 	},
-	isValid : Boolean,
+	isValid : {
+		type: Boolean,
+		default : true
+	},
 	productExpiryDate : Date,
 	lastUpdated : {
 		type : Date,
