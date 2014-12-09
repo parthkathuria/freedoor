@@ -11,7 +11,14 @@ var offerSchema = mongoose.Schema({
 	},
 	buyingQty : Number,
 	offeredDetails : String,
-	status : String,
+	buyerStatus : {
+		type : String,
+		default : "pending"
+	},
+	sellerStatus : {
+		type : String,
+		default : "pending"
+	},
 	offerExpiry : Date,
 	comments : {
 		type : Schema.ObjectId,
