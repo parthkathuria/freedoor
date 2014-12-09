@@ -12,13 +12,14 @@ var productSchema = require('../models/products.js').productSchema;
 var categorySchema = require('../models/category.js').categorySchema;
 var offerSchema = require('../models/offer.js').offerSchema;
 var commentSchema = require('../models/comments.js').commentSchema;
-
+var historySchema = require('../models/history.js').historySchema;
 
 var users = mongoose.model('users',userSchema);
 var products = mongoose.model('products',productSchema);
 var category = mongoose.model('category',categorySchema);
 var offers = mongoose.model('offers', offerSchema);
 var comments = mongoose.model('comments',commentSchema);
+var history = mongoose.model('history',historySchema);
 
 
 // User APIs
@@ -298,16 +299,16 @@ router.put('/category/:categoryId/products/:productId',function(req,res){
 					if(Date.compare(formatted,req.body.productExpiryDate) === 1){
 						return res.status(500).send("Product Expiry Date cannot before today's date.");
 					}else{
-					product.productName = req.body.productName;
-					product.quantity = req.body.quantity;
-					product.userId = req.body.userId;
-					product.expectedOffer = req.body.expectedOffer;
-					product.productDesc = req.body.productDesc;
-					product.productExpiryDate = req.body.productExpiryDate;
-					product.isValid = req.body.isValid;
-					product.categoryId = req.params.categoryId;
-					product.lastUpdated = formatted;
-					product.update(product,function (errProdChk) {
+						product.productName = req.body.productName;
+						product.quantity = req.body.quantity;
+						product.userId = req.body.userId;
+						product.expectedOffer = req.body.expectedOffer;
+						product.productDesc = req.body.productDesc;
+						product.productExpiryDate = req.body.productExpiryDate;
+						product.isValid = req.body.isValid;
+						product.categoryId = req.params.categoryId;
+						product.lastUpdated = formatted;
+						product.update(product,function (errProdChk) {
 					      if (!errProdChk) {
 					    	  mongoose.model('products').findById(req.params.productId,function(updateErr, updateProduct) {
 					    		  if(!updateErr){
@@ -436,8 +437,6 @@ router.delete('/category/:categoryId/products/:productId/offers/:offerId',functi
 
 // update offer
 router.put('/category/:categoryId/products/:productId/offers/:offerId',function(req,res){
-	/*console.log(req.param("buyerStatus"));
-	console.log(req.param("sellerStatus"));*/
 	var now = moment();
 	var formatted = now.format('MM-DD-YYYY');
 	mongoose.model('products').findOne({_id: req.params.productId,categoryId: req.params.categoryId},function(errChk, product) {
@@ -485,6 +484,36 @@ router.put('/category/:categoryId/products/:productId/offers/:offerId',function(
 						    			  res.send(updateErr);
 						    		  }
 						    	  });
+						    	  mongoose.model('history').findOne({offerId:req.params.offerId},function(historyErr,history){
+						    		 if(!historyErr){
+						    			 if(history === null){
+						    				 var historyData = new history({
+									    		  	modified : "Offer modified",
+									    	  		lastModified : formatted
+									    	  });
+						    				 historyDate.save(function(hErr){
+						    					if(hErr){
+						    						return res.status(500).send(hErr);
+						    					}
+						    				 });
+						    			 }else{
+						    				 history.modified = "Offer Modified";
+						    				 history.lastModified = formatted;
+						    				 hisotry.update(history,function(hErrChk){
+						    					if(hErrChk){
+						    						return res.status(500).send(hErrChk);
+						    					} 
+						    				 });
+						    			 }
+						    		 } else {
+						    			 return res.status(500).send(historyErr);
+						    		 }
+						    	  });
+						    	  var historyData = new history({
+						    		  	modified : "Offer modified",
+						    	  		lastModified : formatted
+						    	  });
+						    	  historyData.save
 						      } else {
 						    	  res.status(500).send(err);
 						      }
@@ -549,6 +578,21 @@ router.post('/category/:categoryId/products/:productId/offers',function(req,res)
 			}
 		}else{
 			return res.status(500).send(errChk);
+		}
+	});
+});
+
+//get offer history
+router.get('/category/:categoryId/products/:productId/offers/:offerId/history', function(req, res){
+	mongoose.model('history').findOne({offerId:req.params.offerId},function(historyErr,history){
+		if(!historyErr){
+			if(history === null){
+				return res.status(500).send("Invalid Offer ID");
+			}else{
+				return res.send(history);
+			}
+		}else{
+			return res.status(500).send(historyErr);
 		}
 	});
 });
