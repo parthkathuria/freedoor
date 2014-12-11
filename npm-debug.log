@@ -1,14 +1,10 @@
 0 info it worked if it ends with ok
-1 verbose cli [ 'C:\\nodejs\\\\node.exe',
-1 verbose cli   'C:\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
-1 verbose cli   'install',
-1 verbose cli   '-g',
-1 verbose cli   'date-utils' ]
+1 verbose cli [ '/usr/bin/node', '/usr/bin/npm', 'install', '-g', 'validator' ]
 2 info using npm@1.4.28
 3 info using node@v0.10.33
-4 verbose node symlink C:\nodejs\\node.exe
-5 verbose cache add [ 'date-utils', null ]
-6 verbose cache add name=undefined spec="date-utils" args=["date-utils",null]
+4 verbose node symlink /usr/bin/node
+5 verbose cache add [ 'validator', null ]
+6 verbose cache add name=undefined spec="validator" args=["validator",null]
 7 verbose parsed url { protocol: null,
 7 verbose parsed url   slashes: null,
 7 verbose parsed url   auth: null,
@@ -18,48 +14,256 @@
 7 verbose parsed url   hash: null,
 7 verbose parsed url   search: null,
 7 verbose parsed url   query: null,
-7 verbose parsed url   pathname: 'date-utils',
-7 verbose parsed url   path: 'date-utils',
-7 verbose parsed url   href: 'date-utils' }
-8 silly lockFile d6c972c1-date-utils date-utils
-9 verbose lock date-utils C:\Users\Parth\AppData\Roaming\npm-cache\d6c972c1-date-utils.lock
-10 silly lockFile d6c972c1-date-utils date-utils
-11 silly lockFile d6c972c1-date-utils date-utils
-12 verbose addNamed [ 'date-utils', '' ]
+7 verbose parsed url   pathname: 'validator',
+7 verbose parsed url   path: 'validator',
+7 verbose parsed url   href: 'validator' }
+8 silly lockFile 03a182f7-validator validator
+9 verbose lock validator /home/parth/.npm/03a182f7-validator.lock
+10 silly lockFile 03a182f7-validator validator
+11 silly lockFile 03a182f7-validator validator
+12 verbose addNamed [ 'validator', '' ]
 13 verbose addNamed [ null, '*' ]
-14 silly lockFile 8e5112c1-date-utils date-utils@
-15 verbose lock date-utils@ C:\Users\Parth\AppData\Roaming\npm-cache\8e5112c1-date-utils.lock
-16 silly addNameRange { name: 'date-utils', range: '*', hasData: false }
-17 verbose request where is /date-utils
+14 silly lockFile 82ae3f96-validator validator@
+15 verbose lock validator@ /home/parth/.npm/82ae3f96-validator.lock
+16 silly addNameRange { name: 'validator', range: '*', hasData: false }
+17 verbose request where is /validator
 18 verbose request registry https://registry.npmjs.org/
-19 verbose request id 0b6acc1b7da38deb
-20 verbose url raw /date-utils
-21 verbose url resolving [ 'https://registry.npmjs.org/', './date-utils' ]
-22 verbose url resolved https://registry.npmjs.org/date-utils
-23 verbose request where is https://registry.npmjs.org/date-utils
-24 info trying registry request attempt 1 at 00:43:08
-25 http GET https://registry.npmjs.org/date-utils
+19 verbose request id 9b9100dddfa3e2e0
+20 verbose url raw /validator
+21 verbose url resolving [ 'https://registry.npmjs.org/', './validator' ]
+22 verbose url resolved https://registry.npmjs.org/validator
+23 verbose request where is https://registry.npmjs.org/validator
+24 info trying registry request attempt 1 at 20:43:19
+25 http GET https://registry.npmjs.org/validator
 26 info retry will retry, error on last attempt: Error: getaddrinfo ENOTFOUND
-27 info trying registry request attempt 2 at 00:43:18
-28 http GET https://registry.npmjs.org/date-utils
-29 info retry will retry, error on last attempt: Error: getaddrinfo ENOTFOUND
-30 info trying registry request attempt 3 at 00:44:18
-31 http GET https://registry.npmjs.org/date-utils
-32 silly lockFile 8e5112c1-date-utils date-utils@
-33 silly lockFile 8e5112c1-date-utils date-utils@
-34 error network getaddrinfo ENOTFOUND
-34 error network This is most likely not a problem with npm itself
-34 error network and is related to network connectivity.
-34 error network In most cases you are behind a proxy or have bad network settings.
-34 error network
-34 error network If you are behind a proxy, please make sure that the
-34 error network 'proxy' config is set properly.  See: 'npm help config'
-35 error System Windows_NT 6.2.9200
-36 error command "C:\\nodejs\\\\node.exe" "C:\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "install" "-g" "date-utils"
-37 error cwd C:\Users\Parth\Documents\GitHub\freedoor
-38 error node -v v0.10.33
-39 error npm -v 1.4.28
-40 error syscall getaddrinfo
-41 error code ENOTFOUND
-42 error errno ENOTFOUND
-43 verbose exit [ 1, true ]
+27 info trying registry request attempt 2 at 20:43:54
+28 http GET https://registry.npmjs.org/validator
+29 http 200 https://registry.npmjs.org/validator
+30 silly registry.get cb [ 200,
+30 silly registry.get   { date: 'Wed, 10 Dec 2014 04:44:05 GMT',
+30 silly registry.get     server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+30 silly registry.get     etag: '"92RLFGJ6N22LCSG604RB5N3R1"',
+30 silly registry.get     'content-type': 'application/json',
+30 silly registry.get     'cache-control': 'max-age=60',
+30 silly registry.get     'content-length': '141872',
+30 silly registry.get     'accept-ranges': 'bytes',
+30 silly registry.get     via: '1.1 varnish',
+30 silly registry.get     age: '0',
+30 silly registry.get     'x-served-by': 'cache-lax1435-LAX',
+30 silly registry.get     'x-cache': 'HIT',
+30 silly registry.get     'x-cache-hits': '1',
+30 silly registry.get     'x-timer': 'S1418186644.909710,VS0,VE311',
+30 silly registry.get     vary: 'Accept',
+30 silly registry.get     'keep-alive': 'timeout=10, max=50',
+30 silly registry.get     connection: 'Keep-Alive' } ]
+31 silly addNameRange number 2 { name: 'validator', range: '*', hasData: true }
+32 silly addNameRange versions [ 'validator',
+32 silly addNameRange   [ '0.1.0',
+32 silly addNameRange     '0.1.1',
+32 silly addNameRange     '0.1.2',
+32 silly addNameRange     '0.1.3',
+32 silly addNameRange     '0.1.4',
+32 silly addNameRange     '0.1.5',
+32 silly addNameRange     '0.1.6',
+32 silly addNameRange     '0.1.7',
+32 silly addNameRange     '0.1.8',
+32 silly addNameRange     '0.1.9',
+32 silly addNameRange     '0.2.0',
+32 silly addNameRange     '0.2.1',
+32 silly addNameRange     '0.2.2',
+32 silly addNameRange     '0.2.3',
+32 silly addNameRange     '0.2.4',
+32 silly addNameRange     '0.2.5',
+32 silly addNameRange     '0.2.6',
+32 silly addNameRange     '0.2.7',
+32 silly addNameRange     '0.2.8',
+32 silly addNameRange     '0.2.9',
+32 silly addNameRange     '0.3.0',
+32 silly addNameRange     '0.3.1',
+32 silly addNameRange     '0.3.2',
+32 silly addNameRange     '0.3.4',
+32 silly addNameRange     '0.3.5',
+32 silly addNameRange     '0.3.6',
+32 silly addNameRange     '0.3.7',
+32 silly addNameRange     '0.3.8',
+32 silly addNameRange     '0.3.9',
+32 silly addNameRange     '0.4.0',
+32 silly addNameRange     '0.4.1',
+32 silly addNameRange     '0.4.2',
+32 silly addNameRange     '0.4.3',
+32 silly addNameRange     '0.4.4',
+32 silly addNameRange     '0.4.5',
+32 silly addNameRange     '0.4.6',
+32 silly addNameRange     '0.4.6-1',
+32 silly addNameRange     '0.4.6-2',
+32 silly addNameRange     '0.4.6-3',
+32 silly addNameRange     '0.4.7',
+32 silly addNameRange     '0.4.8',
+32 silly addNameRange     '0.4.9',
+32 silly addNameRange     '0.4.10',
+32 silly addNameRange     '0.4.11',
+32 silly addNameRange     '0.4.12',
+32 silly addNameRange     '0.4.13',
+32 silly addNameRange     '0.4.15',
+32 silly addNameRange     '0.4.16',
+32 silly addNameRange     '0.4.17',
+32 silly addNameRange     '0.4.18',
+32 silly addNameRange     '0.4.19',
+32 silly addNameRange     '0.4.20',
+32 silly addNameRange     '0.4.21',
+32 silly addNameRange     '0.4.22',
+32 silly addNameRange     '0.4.23',
+32 silly addNameRange     '0.4.24',
+32 silly addNameRange     '0.4.25',
+32 silly addNameRange     '0.4.27',
+32 silly addNameRange     '0.4.28',
+32 silly addNameRange     '0.5.0',
+32 silly addNameRange     '1.0.0',
+32 silly addNameRange     '1.1.0',
+32 silly addNameRange     '1.1.1',
+32 silly addNameRange     '1.1.2',
+32 silly addNameRange     '1.1.3',
+32 silly addNameRange     '1.2.0',
+32 silly addNameRange     '1.2.1',
+32 silly addNameRange     '1.2.2',
+32 silly addNameRange     '1.3.0',
+32 silly addNameRange     '1.4.0',
+32 silly addNameRange     '1.5.0',
+32 silly addNameRange     '1.5.1',
+32 silly addNameRange     '2.0.0',
+32 silly addNameRange     '2.1.0',
+32 silly addNameRange     '3.0.0',
+32 silly addNameRange     '3.1.0',
+32 silly addNameRange     '3.2.0',
+32 silly addNameRange     '3.2.1',
+32 silly addNameRange     '3.3.0',
+32 silly addNameRange     '3.4.0',
+32 silly addNameRange     '3.5.0',
+32 silly addNameRange     '3.5.1',
+32 silly addNameRange     '3.6.0',
+32 silly addNameRange     '3.7.0',
+32 silly addNameRange     '3.8.0',
+32 silly addNameRange     '3.9.0',
+32 silly addNameRange     '3.10.0',
+32 silly addNameRange     '3.11.0',
+32 silly addNameRange     '3.11.1',
+32 silly addNameRange     '3.11.2',
+32 silly addNameRange     '3.12.0',
+32 silly addNameRange     '3.13.0',
+32 silly addNameRange     '3.14.0',
+32 silly addNameRange     '3.14.1',
+32 silly addNameRange     '3.15.0',
+32 silly addNameRange     '3.16.0',
+32 silly addNameRange     '3.16.1',
+32 silly addNameRange     '3.17.0',
+32 silly addNameRange     '3.17.1',
+32 silly addNameRange     '3.17.2',
+32 silly addNameRange     '3.18.0',
+32 silly addNameRange     '3.18.1',
+32 silly addNameRange     '3.19.0',
+32 silly addNameRange     '3.19.1',
+32 silly addNameRange     '3.20.0',
+32 silly addNameRange     '3.21.0',
+32 silly addNameRange     '3.22.0',
+32 silly addNameRange     '3.22.1',
+32 silly addNameRange     '3.22.2' ] ]
+33 verbose addNamed [ 'validator', '3.22.2' ]
+34 verbose addNamed [ '3.22.2', '3.22.2' ]
+35 silly lockFile 73a3efc8-validator-3-22-2 validator@3.22.2
+36 verbose lock validator@3.22.2 /home/parth/.npm/73a3efc8-validator-3-22-2.lock
+37 silly lockFile c068c665-g-validator-validator-3-22-2-tgz https://registry.npmjs.org/validator/-/validator-3.22.2.tgz
+38 verbose lock https://registry.npmjs.org/validator/-/validator-3.22.2.tgz /home/parth/.npm/c068c665-g-validator-validator-3-22-2-tgz.lock
+39 verbose addRemoteTarball [ 'https://registry.npmjs.org/validator/-/validator-3.22.2.tgz',
+39 verbose addRemoteTarball   '6f297ae67f7f82acc76d0afdb49f18d9a09c18c0' ]
+40 info retry fetch attempt 1 at 20:44:06
+41 verbose fetch to= /tmp/npm-3469-1lqRoPKj/registry.npmjs.org/validator/-/validator-3.22.2.tgz
+42 http GET https://registry.npmjs.org/validator/-/validator-3.22.2.tgz
+43 http 200 https://registry.npmjs.org/validator/-/validator-3.22.2.tgz
+44 silly lockFile c068c665-g-validator-validator-3-22-2-tgz https://registry.npmjs.org/validator/-/validator-3.22.2.tgz
+45 silly lockFile c068c665-g-validator-validator-3-22-2-tgz https://registry.npmjs.org/validator/-/validator-3.22.2.tgz
+46 silly lockFile 73a3efc8-validator-3-22-2 validator@3.22.2
+47 silly lockFile 73a3efc8-validator-3-22-2 validator@3.22.2
+48 silly lockFile 82ae3f96-validator validator@
+49 silly lockFile 82ae3f96-validator validator@
+50 silly resolved [ { name: 'validator',
+50 silly resolved     description: 'String validation and sanitization',
+50 silly resolved     version: '3.22.2',
+50 silly resolved     homepage: 'http://github.com/chriso/validator.js',
+50 silly resolved     keywords:
+50 silly resolved      [ 'validator',
+50 silly resolved        'validation',
+50 silly resolved        'validate',
+50 silly resolved        'sanitization',
+50 silly resolved        'sanitize',
+50 silly resolved        'sanitisation',
+50 silly resolved        'sanitise',
+50 silly resolved        'assert' ],
+50 silly resolved     author: { name: 'Chris O\'Hara', email: 'cohara87@gmail.com' },
+50 silly resolved     main: 'validator.js',
+50 silly resolved     bugs: { url: 'http://github.com/chriso/validator.js/issues' },
+50 silly resolved     repository:
+50 silly resolved      { type: 'git',
+50 silly resolved        url: 'http://github.com/chriso/validator.js.git' },
+50 silly resolved     devDependencies:
+50 silly resolved      { mocha: 'latest',
+50 silly resolved        istanbul: 'latest',
+50 silly resolved        jshint: 'latest',
+50 silly resolved        'uglify-js': 'latest',
+50 silly resolved        coveralls: 'latest',
+50 silly resolved        contextify: 'latest' },
+50 silly resolved     scripts:
+50 silly resolved      { test: '_mocha --reporter spec',
+50 silly resolved        coveralls: 'istanbul cover _mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage' },
+50 silly resolved     engines: { node: '>= 0.10' },
+50 silly resolved     licenses: [ [Object] ],
+50 silly resolved     gitHead: 'ae9ef3ccc2c9cf92f5954d65c0b1612b008dcbbc',
+50 silly resolved     _id: 'validator@3.22.2',
+50 silly resolved     _shasum: '6f297ae67f7f82acc76d0afdb49f18d9a09c18c0',
+50 silly resolved     _from: 'validator@',
+50 silly resolved     _npmVersion: '2.1.10',
+50 silly resolved     _nodeVersion: '0.10.33',
+50 silly resolved     _npmUser: { name: 'cohara87', email: 'cohara87@gmail.com' },
+50 silly resolved     maintainers: [ [Object] ],
+50 silly resolved     dist:
+50 silly resolved      { shasum: '6f297ae67f7f82acc76d0afdb49f18d9a09c18c0',
+50 silly resolved        tarball: 'http://registry.npmjs.org/validator/-/validator-3.22.2.tgz' },
+50 silly resolved     directories: {},
+50 silly resolved     _resolved: 'https://registry.npmjs.org/validator/-/validator-3.22.2.tgz' } ]
+51 info install validator@3.22.2 into /usr/lib
+52 info installOne validator@3.22.2
+53 verbose lib/node_modules/validator unbuild
+54 verbose tar unpack /home/parth/.npm/validator/3.22.2/package.tgz
+55 silly lockFile 0cb0d514-r-usr-lib-node-modules-validator tar:///usr/lib/node_modules/validator
+56 verbose lock tar:///usr/lib/node_modules/validator /home/parth/.npm/0cb0d514-r-usr-lib-node-modules-validator.lock
+57 silly lockFile bab977ce-npm-validator-3-22-2-package-tgz tar:///home/parth/.npm/validator/3.22.2/package.tgz
+58 verbose lock tar:///home/parth/.npm/validator/3.22.2/package.tgz /home/parth/.npm/bab977ce-npm-validator-3-22-2-package-tgz.lock
+59 silly gunzTarPerm modes [ '775', '664' ]
+60 error Error: EACCES, mkdir '/usr/lib/node_modules/validator'
+60 error  { [Error: EACCES, mkdir '/usr/lib/node_modules/validator']
+60 error   errno: 3,
+60 error   code: 'EACCES',
+60 error   path: '/usr/lib/node_modules/validator',
+60 error   fstream_type: 'Directory',
+60 error   fstream_path: '/usr/lib/node_modules/validator',
+60 error   fstream_class: 'DirWriter',
+60 error   fstream_stack:
+60 error    [ '/usr/lib/node_modules/npm/node_modules/fstream/lib/dir-writer.js:36:23',
+60 error      '/usr/lib/node_modules/npm/node_modules/mkdirp/index.js:46:53',
+60 error      'Object.oncomplete (fs.js:107:15)' ] }
+61 error Please try running this command again as root/Administrator.
+62 error System Linux 3.13.0-39-generic
+63 error command "/usr/bin/node" "/usr/bin/npm" "install" "-g" "validator"
+64 error cwd /home/parth/freedoor
+65 error node -v v0.10.33
+66 error npm -v 1.4.28
+67 error path /usr/lib/node_modules/validator
+68 error fstream_path /usr/lib/node_modules/validator
+69 error fstream_type Directory
+70 error fstream_class DirWriter
+71 error code EACCES
+72 error errno 3
+73 error stack Error: EACCES, mkdir '/usr/lib/node_modules/validator'
+74 error fstream_stack /usr/lib/node_modules/npm/node_modules/fstream/lib/dir-writer.js:36:23
+74 error fstream_stack /usr/lib/node_modules/npm/node_modules/mkdirp/index.js:46:53
+74 error fstream_stack Object.oncomplete (fs.js:107:15)
+75 verbose exit [ 3, true ]
